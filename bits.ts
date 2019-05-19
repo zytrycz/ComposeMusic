@@ -26,16 +26,16 @@ function clearBit (pNum, pBitIndex){
 
 function combineBits (pNumber1, pNumber2){
 
-    let newNumber=0;
-    let answer=0;
-
-    for (let index = 7; index < 16; index++){
-        answer += getBit(pNumber1,index)==1 ? setBit(newNumber,index) : newNumber;
+    let newNumber=0; //variable usara para ir sumando los valores
+    let answer=0;//variable que guardara la respuesta
+    for (let index = 7; index < 16; index++){ //primer for para obtener bits del primer numero
+        answer += getBit(pNumber1,index)==1 ? setBit(newNumber,index) : 0; //if acortado, le summa al nuevo numero la respuesta
+                                                                              //si el bit solicitado ==1 pone lo activa en el nuevo tambien
     }
-    for (let index = 0; index < 7; index++){
-        answer += getBit(pNumber2,index)==1 ? setBit(newNumber,index) : newNumber;
+    for (let index = 0; index < 7; index++){ //primer for para obtener bits del segundo numero
+        answer += getBit(pNumber2,index)==1 ? setBit(newNumber,index) : 0;
     }
     return answer;
 }
 
-console.log(combineBits(55830,0));
+console.log(combineBits(456,0));

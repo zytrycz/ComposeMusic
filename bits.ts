@@ -1,6 +1,4 @@
-
-
-function getBit(pNum, pBitIndex)
+export function getBit(pNum, pBitIndex)
 {
     const bitMask = 1 << pBitIndex; // 00000001 se hace corrimiento para poner el 1 en el indice a buscar
 
@@ -9,14 +7,14 @@ function getBit(pNum, pBitIndex)
     return result >>> pBitIndex;    //zero-fill shift a la derecha
 }
 
-function setBit (pNum, pBitIndex){
+export function setBit (pNum, pBitIndex){
 
     const bitMask = 1 << pBitIndex; // 00000001 se hace corrimiento para poner el 1 en el indice a activar
 
     return pNum | bitMask;          // or dejara todos los bits iguales excepto el que se esta cambiando
 }
 
-function clearBit (pNum, pBitIndex){
+export function clearBit (pNum, pBitIndex){
 
     const bitMask = ~(1 << pBitIndex); // 00000001 se hace corrimiento para poner el 1 en el indice a apagar
                                        // se usa un not para invertir los valores
@@ -24,7 +22,7 @@ function clearBit (pNum, pBitIndex){
     return pNum & bitMask;             // and dejara todos los bits iguales excepto el que se esta cambiando
 }
 
-function combineBits (pNumber1, pNumber2){
+export function combineBits (pNumber1, pNumber2){
 
     let newNumber=0; //variable usara para ir sumando los valores
     let answer=0;//variable que guardara la respuesta
@@ -37,5 +35,3 @@ function combineBits (pNumber1, pNumber2){
     }
     return answer;
 }
-
-console.log(combineBits(456,0));

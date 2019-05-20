@@ -5,7 +5,7 @@ const NotasIgnoradas=16;//nos quedamos con un 17avo de la cancion
 const DistanciaNotas=0.001;//la distancia que queda entre numeros despues de 
 //ignorar ese 17avo
 
-enum formas{
+export enum formas{
     PrecipicioDown,
     MontanaDown,
     ColinaDown,

@@ -20,22 +20,19 @@ export function createTable(pData){
     /** In: array[ [cromosome1,cant],
      *             [cromosome2,cant], ... ] */
     for(let index = 0; index < pData.length; index++) {
+        let copyArray = Object.assign([], arrayToSlice);
         let cant = getCantNums(pData[index][1]);        
         /**Se usa slice y la cantidad de numneros en negativo para que devuelvva esa cantidad de valores
          * se hace un reverse a todo el array para que corte los nums en orden
          * se le vuelve a hacer reverse para que queden en orden
          * por ultimo se cortan los numeros usados del array
          */
-        dictionary[ pData[index][0] ] = ((arrayToSlice.reverse()).slice( cant*-1)).reverse(); 
+        dictionary[pData[index][0]] = ((copyArray.reverse() ).slice( cant*-1)).reverse(); 
         arrayToSlice = arrayToSlice.slice(cant);
     };
     
 }
-function p(){
-    createTable([["A",32767],["b",16383],["c",16383]]);
-    Object.keys(dictionary).forEach((key) => {console.log("Key: ", key, "\nValue",dictionary[key])});
-}
-p();
+//createTable([["A",32767],["b",16383],["c",16383]]);
 //let p = [1,2,3,4,5,6,7,8,9];
 //console.log(p.slice(3));
 /**iterar sobre el diccionario 

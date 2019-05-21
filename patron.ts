@@ -10,7 +10,7 @@ export enum formas{
 
 export class patron{
     
-    private pendiente:number;//valor de la pendiente
+    public pendiente:number;//valor de la pendiente
     private inicio:number;//segundo de inicio de la forma
     private final:number;//segundo de finalizacion de la forma
     private form:formas;//primero sera uno de los que teniamos antes y despues sera uno de 16bits

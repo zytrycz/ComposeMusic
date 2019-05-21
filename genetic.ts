@@ -3,8 +3,8 @@ const max = 65535;
 var arrayToSlice = Array.apply(null, {length: max}).map(Number.call, Number);
 
 /** Se usara esta interface para tener una estructura de dicionario */
-interface dictionary {
-    [cromosome: string] : any;
+export interface dictionary {
+    [cromosome: number] : any;
 }
 
 let dictionary: dictionary = {};
@@ -31,7 +31,6 @@ export function createTable(pData){
         arrayToSlice = arrayToSlice.slice(cant);
     };
     return dictionary;
-    
 }
 //createTable([["A",32767],["b",16383],["c",16383]]);
 //let p = [1,2,3,4,5,6,7,8,9];
@@ -39,3 +38,4 @@ export function createTable(pData){
 /**iterar sobre el diccionario 
  * Object.keys(dictionary).forEach((key) => {console.log(dictionary[key])});
 */
+ 

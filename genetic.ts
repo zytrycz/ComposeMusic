@@ -32,7 +32,7 @@ export function createTable(pData){
     };
     return dictionary;
 }
-
+//createTable([["A",32767],["b",16383],["c",16383]]);
 //let p = [1,2,3,4,5,6,7,8,9];
 //console.log(p.slice(3));
 /**iterar sobre el diccionario 

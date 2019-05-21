@@ -19,7 +19,7 @@ function getCantNums(pCant){
 export function createTable(pData){
     /** In: array[ [cromosome1,cant],
      *             [cromosome2,cant], ... ] */
-    for(let index = 0; index < pData.lenght; index++) {
+    for(let index = 0; index < pData.length; index++) {
         let cant = getCantNums(pData[index][1]);        
         /**Se usa slice y la cantidad de numneros en negativo para que devuelvva esa cantidad de valores
          * se hace un reverse a todo el array para que corte los nums en orden
@@ -31,7 +31,11 @@ export function createTable(pData){
     };
     
 }
-
+function p(){
+    createTable([["A",32767],["b",16383],["c",16383]]);
+    Object.keys(dictionary).forEach((key) => {console.log("Key: ", key, "\nValue",dictionary[key])});
+}
+p();
 //let p = [1,2,3,4,5,6,7,8,9];
 //console.log(p.slice(3));
 /**iterar sobre el diccionario 

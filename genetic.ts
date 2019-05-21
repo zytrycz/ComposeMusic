@@ -30,6 +30,7 @@ export function createTable(pData){
         dictionary[pData[index][0]] = ((copyArray.reverse() ).slice( cant*-1)).reverse(); 
         arrayToSlice = arrayToSlice.slice(cant);
     };
+    return dictionary;
     
 }
 //createTable([["A",32767],["b",16383],["c",16383]]);

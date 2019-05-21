@@ -3,8 +3,8 @@ const max = 65535;
 var arrayToSlice = Array.apply(null, {length: max}).map(Number.call, Number);
 
 /** Se usara esta interface para tener una estructura de dicionario */
-interface dictionary {
-    [cromosome: string] : any;
+export interface dictionary {
+    [cromosome: number] : any;
 }
 
 let dictionary: dictionary = {};
@@ -19,17 +19,18 @@ function getCantNums(pCant){
 export function createTable(pData){
     /** In: array[ [cromosome1,cant],
      *             [cromosome2,cant], ... ] */
-    for(let index = 0; index < pData.lenght; index++) {
+    for(let index = 0; index < pData.length; index++) {
+        let copyArray = Object.assign([], arrayToSlice);
         let cant = getCantNums(pData[index][1]);        
         /**Se usa slice y la cantidad de numneros en negativo para que devuelvva esa cantidad de valores
          * se hace un reverse a todo el array para que corte los nums en orden
          * se le vuelve a hacer reverse para que queden en orden
          * por ultimo se cortan los numeros usados del array
          */
-        dictionary[ pData[index][0] ] = ((arrayToSlice.reverse()).slice( cant*-1)).reverse(); 
+        dictionary[pData[index][0]] = ((copyArray.reverse() ).slice( cant*-1)).reverse(); 
         arrayToSlice = arrayToSlice.slice(cant);
     };
-    
+    return dictionary;
 }
 
 //let p = [1,2,3,4,5,6,7,8,9];
@@ -37,3 +38,4 @@ export function createTable(pData){
 /**iterar sobre el diccionario 
  * Object.keys(dictionary).forEach((key) => {console.log(dictionary[key])});
 */
+ 

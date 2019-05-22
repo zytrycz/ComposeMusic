@@ -86,6 +86,6 @@ function mutar(pNum1){
     }
 }
 
-function randomize(pNum1:number,pNum2:number):number{
+export function randomize(pNum1:number,pNum2:number):number{
     return Math.floor(Math.random()*(pNum1-pNum2+1)-pNum2);
 }

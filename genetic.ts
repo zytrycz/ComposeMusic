@@ -9,9 +9,9 @@ export interface dictionary {
 
 let dictionary: dictionary = {};
 
-function getCantNums(pCant){
+function getCantNums(pCant, cantMax){
     //vemos cuanto porcentaje del total (65535) representa el cromosoma
-    let numPercent = pCant/max;
+    let numPercent = pCant/cantMax;
     //Vemos la cantidad de numeros maxima posible con ese porcentaje
     return Math.floor(numPercent*max);     
 }
@@ -19,9 +19,13 @@ function getCantNums(pCant){
 export function createTable(pData){
     /** In: array[ [cromosome1,cant],
      *             [cromosome2,cant], ... ] */
+    let cantMax;
+    pData.forEach(element => { 
+        cantMax += element[1];
+    });
     for(let index = 0; index < pData.length; index++) {
         let copyArray = Object.assign([], arrayToSlice);
-        let cant = getCantNums(pData[index][1]);        
+        let cant = getCantNums(pData[index][1], cantMax);        
         /**Se usa slice y la cantidad de numneros en negativo para que devuelvva esa cantidad de valores
          * se hace un reverse a todo el array para que corte los nums en orden
          * se le vuelve a hacer reverse para que queden en orden

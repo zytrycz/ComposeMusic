@@ -31,3 +31,20 @@ export function saveAudio(pLeftChannelArray,pRightChannelArray){
         fs.writeFileSync('compose.wav', new Buffer(buffer));
     } );
 }
+
+export function (pDataArray, pSong, pCantNotesS1){
+    /**La funcion recibira un array de suarrays donde cada uno tendra el codigo de forma y la cantidad respectiva
+     * Se iran comparando valores de pSong para poder rellenar los gaps entre valores 
+     */
+    let final32FloatArray;
+    let notesArray = [];
+    let samplesArray = pSong.samples;
+    for (let index = 0; index< samplesArray.length; index++){
+        //se analiza el index y su sucesor para ver con cuantas notaas rellenar
+        let cantNotesRefill = samplesArray[index+1].inicio - samplesArray[index].final;
+        cantNotesRefill /= pCantNotesS1;
+        final32FloatArray.push();
+
+    }
+
+}

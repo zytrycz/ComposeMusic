@@ -39,3 +39,15 @@ export function createTable(pData){
  * Object.keys(dictionary).forEach((key) => {console.log(dictionary[key])});
 */
  
+export function findIfBelongs(pkey,pDictionary,pNumberToFind):boolean{
+    return pDictionary[pkey].includes(pNumberToFind);
+}
+
+export function keyIfBelongs(pDictionary,pNumberToFind):number{
+    for(let index=0;index<pDictionary.length;index++){
+        if(findIfBelongs(index,pDictionary,pNumberToFind)){
+            return index;
+        }
+    }
+    return -1;//que no esta
+}

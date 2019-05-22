@@ -42,13 +42,14 @@ export function addNotes(pDataArray, pSong, pCantNotesS1){
         final32FloatArray.push(samplesArray[index].bNote, samplesArray[index].eNote);
         //se analiza el index y su sucesor para ver con cuantas notaas rellenar
         let cantNotesRefill = samplesArray[index+1].inicio - samplesArray[index].final;
+        let valueForm = pSong.asignarForma(samplesArray[index+1].inicio - samplesArray[index].final);
         cantNotesRefill /= pCantNotesS1;
         let min = Math.min(samplesArray[index].eNote,samplesArray[index+1].bNote);
         let max = Math.max(samplesArray[index].eNote,samplesArray[index+1].bNote);
         while(cantNotesRefill!=0){
             cantNotesRefill--;
             final32FloatArray.push(randomize(min,max));
-            //aca esta al enum respectivo del DataArray
+            pDataArray[valueForm][1]--;
         }
     }
     return final32FloatArray;

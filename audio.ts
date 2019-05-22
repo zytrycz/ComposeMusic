@@ -51,5 +51,5 @@ export function addNotes(pDataArray, pSong, pCantNotesS1){
             //aca esta al enum respectivo del DataArray
         }
     }
-
+    return final32FloatArray;
 }

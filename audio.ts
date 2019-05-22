@@ -46,6 +46,7 @@ export function addNotes(pDataArray, pSong, pCantNotesS1){
         let min = Math.min(samplesArray[index].eNote,samplesArray[index+1].bNote);
         let max = Math.max(samplesArray[index].eNote,samplesArray[index+1].bNote);
         while(cantNotesRefill!=0){
+            cantNotesRefill--;
             final32FloatArray.push(randomize(min,max));
             //aca esta al enum respectivo del DataArray
         }

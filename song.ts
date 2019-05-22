@@ -28,7 +28,7 @@ export class Song{//representacion del envolvente L de una cancion con sus forma
             pendienteTemp=(pLeftEnvolvent[index+1]-pLeftEnvolvent[index]);//la diferencia 
             //entre los x siempre seria 0.01 por la manera en que lo armamos al principio
             this.samples.push(new patron(index*DistanciaNotas,(index*DistanciaNotas)
-            +DistanciaNotas,pendienteTemp));//todavia no sabemos las formas
+            +DistanciaNotas,pendienteTemp,pLeftEnvolvent[index],pLeftEnvolvent[index+1]));//todavia no sabemos las formas
             //simplemente estamos calculando pendientes, para despues ordenarlas
         }     
         this.final=index*NotasIgnoradas;
@@ -44,7 +44,7 @@ export class Song{//representacion del envolvente L de una cancion con sus forma
     }*/
 
     contarFormas(){//asume las pendiente ordenadas de menor a mayor
-        let totalCount=PatronesBase;// lista que nos dira cuantos
+        var totalCount=PatronesBase;// lista que nos dira cuantos
         //de cada forma hay
         let formaTemp=-1;
         for(let index=0;index<this.samples.length;index++){

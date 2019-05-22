@@ -1,4 +1,4 @@
-import {Song,PatronesBase,NotasIgnoradas} from './song'
+import {Song,NotasIgnoradas} from './song'
 import {formas} from './patron'
 import {readAudio} from './audio'
 import {createTable,dictionary,keyIfBelongs} from './genetic'
@@ -33,15 +33,17 @@ export function generarPoblacion(pPastState:Array<[formas,number]>)
 }*/
 
 export function fitness(pPoblacion,pCondicion,diccionario){
-    let soleSurvivors=0,genCounter=0;;
+    let soleSurvivors=0,genCounter=0,cantProduce=0,
+    totalP=totalForms(pPoblacion),totalC=totalForms(pCondicion);
     while(soleSurvivors<6){
         soleSurvivors=0;
         console.log("generacion",genCounter);genCounter++;
         for(let index=0;index<pCondicion.length;index++){
-            if(pPoblacion[index][1]>pCondicion[index][1]){//must kill->un porcentaje de la diferencia morira
-                lessFitness(pPoblacion[index],index,(pCondicion[index][1]/pPoblacion[index][1]));
-            }else if(pPoblacion[index][1]<pCondicion[index][1]){//must procreate
-                plusFitness(pPoblacion,(pPoblacion[index][1]/pCondicion[index][1]),diccionario,index);
+            if(pPoblacion[index][1]/totalP>pCondicion[index][1]/totalC){//must kill->un porcentaje de la diferencia morira
+                cantProduce+=lessFitness(pPoblacion[index],(pCondicion[index][1]/pPoblacion[index][1]));
+            }else if(pPoblacion[index][1]/totalP<pCondicion[index][1]/totalC){//must procreate
+                cantProduce-=plusFitness(pPoblacion,(pCondicion[index][1]/pPoblacion[index][1]),
+                diccionario,index,cantProduce);
             }else{
                 soleSurvivors++//must survive
             }
@@ -52,14 +54,19 @@ export function fitness(pPoblacion,pCondicion,diccionario){
     return pPoblacion;
 }
 
-function lessFitness(pPoblacion:Array<[formas,number]>,pChosenForm:formas,pPorcentaje:number){//matar poblacion
-    let maxRange=pPoblacion.length*pPorcentaje;
-    pPoblacion[pChosenForm][1]-=maxRange;//"matar cantidad de formas"
+function lessFitness(pPoblacion:[formas,number],pPorcentaje:number){//matar poblacion
+    let maxRange=pPoblacion[1] *pPorcentaje;
+    let answer= randomize( maxRange,1)
+    pPoblacion[1]-= answer;//"matar cantidad de formas"
+    return answer;
 }
 
 function plusFitness(pPoblacion:Array<[formas,number]>,pPorcentaje:number,
-    diccionario:dictionary,pChosenForm){
-    let maxRange=pPoblacion[pChosenForm].length-1,bitCombinable,bit1,bit2;
+    diccionario:dictionary,pChosenForm,pCantProduce){
+    let maxRange=pPoblacion[pChosenForm][1]*pPorcentaje,bitCombinable,bit1,bit2,producidos=0;
+    if(pCantProduce<maxRange){
+        maxRange=pCantProduce;
+    }
     for(let gonnaCreate= randomize(maxRange,1);gonnaCreate>0;gonnaCreate--){
         bit1=diccionario[pChosenForm]
         [(randomize(diccionario[pChosenForm][0]+maxRange,diccionario[pChosenForm][0]))];
@@ -70,9 +77,13 @@ function plusFitness(pPoblacion:Array<[formas,number]>,pPorcentaje:number,
         bitCombinable=combineBits(bit1,bit2);//crea hijo
         mutar(bitCombinable);//muta hijo
         //ver a que grupo pertenece el nuevo hijo
-        pPoblacion[keyIfBelongs(diccionario,bitCombinable)][1]++;//uno mas a la forma que
-        //pertenezca
+        let grupoDeHijo=keyIfBelongs(createTable(pPoblacion),bitCombinable);
+        if(grupoDeHijo!=-1){
+            pPoblacion[grupoDeHijo][1]++;//uno mas a la forma que pertenezca
+            producidos++;
+        }        
     }
+    return producidos;
 }
 
 function mutar(pNum1){
@@ -88,4 +99,12 @@ function mutar(pNum1){
 
 function randomize(pNum1:number,pNum2:number):number{
     return Math.floor(Math.random()*(pNum1-pNum2+1)-pNum2);
+}
+
+function totalForms(pShortSong:Array<[formas,number]>){
+    let total=0;
+    for(let index=0;index<pShortSong.length;index++){
+        total+=pShortSong[index][1];
+    }
+    return total;
 }

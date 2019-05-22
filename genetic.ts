@@ -1,3 +1,5 @@
+import { formas } from "./patron";
+
 const max = 65535;
 
 var arrayToSlice = Array.apply(null, {length: max}).map(Number.call, Number);
@@ -43,8 +45,8 @@ export function findIfBelongs(pkey,pDictionary,pNumberToFind):boolean{
     return pDictionary[pkey].includes(pNumberToFind);
 }
 
-export function keyIfBelongs(pDictionary,pNumberToFind):number{
-    for(let index=0;index<pDictionary.length;index++){
+export function keyIfBelongs(pDictionary:dictionary,pNumberToFind):number{
+    for(let index=0;index<7;index++){
         if(findIfBelongs(index,pDictionary,pNumberToFind)){
             return index;
         }

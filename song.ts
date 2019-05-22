@@ -6,13 +6,6 @@ const ValorMontana=0.3;
 export const NotasIgnoradas=16;//nos quedamos con un 17avo de la cancion
 const DistanciaNotas=0.001;//la distancia que queda entre numeros despues de 
 //ignorar ese 17avo
-export const PatronesBase=[[formas.PrecipicioDown,0],
-[formas.MontanaDown,0],
-[formas.ColinaDown,0],
-[formas.Valle,0],
-[formas.ColinaUp,0],
-[formas.MontanaUp,0],
-[formas.PrecipicioUp,0]]
 
 export class Song{//representacion del envolvente L de una cancion con sus formas
     private
@@ -44,7 +37,13 @@ export class Song{//representacion del envolvente L de una cancion con sus forma
     }*/
 
     contarFormas(){//asume las pendiente ordenadas de menor a mayor
-        var totalCount=PatronesBase;// lista que nos dira cuantos
+        var totalCount=[[formas.PrecipicioDown,0],
+        [formas.MontanaDown,0],
+        [formas.ColinaDown,0],
+        [formas.Valle,0],
+        [formas.ColinaUp,0],
+        [formas.MontanaUp,0],
+        [formas.PrecipicioUp,0]];// lista que nos dira cuantos
         //de cada forma hay
         let formaTemp=-1;
         for(let index=0;index<this.samples.length;index++){
